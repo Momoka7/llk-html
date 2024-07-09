@@ -1,0 +1,125 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.game-container {
+  text-align: center;
+  width: 100%;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px;
+  background-color: #e0e0e0;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 950px) {
+  #game-board {
+    max-width: 95vw;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  #game-board {
+    gap: 5px;
+  }
+
+  .tile {
+    border-radius: 10px;
+  }
+}
+
+.tile {
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tile:hover,
+.tile.selected {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 可以添加一个额外的效果来区分hover和selected状态 */
+.tile.selected {
+  border: 3px solid #333;
+}
+
+.path-segment {
+  position: absolute;
+  background-color: rgba(255, 255, 0, 0.5); /* 半透明黄色 */
+  z-index: 10;
+}
+
+.path-horizontal {
+  height: 6px;
+}
+
+.path-vertical {
+  width: 6px;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+    /* transform: scale(1); */
+  }
+  to {
+    opacity: 0;
+    /* transform: scale(0); */
+  }
+}
+
+.tile.disappearing {
+  animation: disappear 0.5s forwards;
+}
+
+.tile.empty {
+  pointer-events: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container img {
+  max-width: 100%;
+  max-height: 100%;
+}
