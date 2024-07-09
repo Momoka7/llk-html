@@ -3,11 +3,12 @@ export function drawPath(path) {
   clearPath();
 
   let rect = document
-    .querySelector(".tile[data-row='0'][data-col='0']")
+    .querySelector(`.tile[data-row='${path[0].y}'][data-col='${path[0].x}']`)
     .getBoundingClientRect();
   const gameboard = document.getElementById("game-board");
   let gap = parseFloat(window.getComputedStyle(gameboard).gap);
   let padding = parseFloat(window.getComputedStyle(gameboard).padding);
+  console.log(rect.x, rect.y, rect.width, rect.height);
 
   for (let i = 0; i < path.length - 1; i++) {
     if (path[i].y == path[i + 1].y && path[i].x == path[i + 1].x) continue;
@@ -22,12 +23,16 @@ export function drawPath(path) {
         (rect.width + gap) * Math.abs(path[i].x - path[i + 1].x)
       }px`;
       pathSegment.style.left = `${
-        (rect.width + gap) * Math.min(path[i].x, path[i + 1].x) +
+        (rect.width + gap) * (Math.min(path[i].x, path[i + 1].x) - path[0].x) +
         rect.width / 2 +
-        rect.left
+        rect.left +
+        window.scrollX
       }px`;
       pathSegment.style.top = `${
-        (rect.height + gap) * path[i].y + rect.top + rect.height / 2
+        (rect.height + gap) * (path[i].y - path[0].y) +
+        rect.top +
+        rect.height / 2 +
+        window.scrollY
       }px`;
     } else {
       // 垂直路径
@@ -36,12 +41,16 @@ export function drawPath(path) {
         (rect.height + gap) * Math.abs(path[i].y - path[i + 1].y)
       }px`;
       pathSegment.style.left = `${
-        (rect.width + gap) * path[i].x + rect.left + rect.width / 2
+        (rect.width + gap) * (path[i].x - path[0].x) +
+        rect.left +
+        rect.width / 2 +
+        window.scrollX
       }px`;
       pathSegment.style.top = `${
-        (rect.height + gap) * Math.min(path[i].y, path[i + 1].y) +
+        (rect.height + gap) * (Math.min(path[i].y, path[i + 1].y) - path[0].y) +
         rect.height / 2 +
-        rect.top
+        rect.top +
+        window.scrollY
       }px`;
     }
 

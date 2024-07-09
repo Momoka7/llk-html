@@ -1,6 +1,6 @@
 import { drawPath, clearPath } from "./src/drawpath";
 import { Board } from "./src/board";
-import { colorRes, spriteRes } from "./src/res";
+import { colorRes, spriteRes, dsSpriteRes } from "./src/res";
 
 const gameBoard = document.getElementById("game-board");
 const colors = [
@@ -14,7 +14,7 @@ const colors = [
   "#FFC6FF",
 ];
 
-const board = new Board(10, 10, spriteRes, 80, 80);
+const board = new Board(10, 10, dsSpriteRes, 80, 80);
 board.initBoard();
 
 // let selectedTiles = [];
